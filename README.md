@@ -17,6 +17,7 @@ each developed against per-frame instrumentation on real hardware:
 | Vulkan swapchain presentation (no GL interop, no readback) | +7% fps, 1%-low +18% |
 | x86-TSO via LDAPR/STLR instead of per-access fences | median frame time −10%, stutters −17% |
 | Native-double x87 helpers | p99 −8%, 1%-low +14% |
+| Direct render-target sampling (no per-frame copies) | stutters −15%, 1%-low +7% |
 
 Together: **Halo 2 runs at its native 30 fps cap; GTA San Andreas at a
 steady 60**. Morrowind, BloodRayne, Tony Hawk titles and others boot and

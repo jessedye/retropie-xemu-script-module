@@ -21,4 +21,8 @@ export XEMU_TSO=1
 # to bit-exact softfloat.
 export XEMU_HARD_FPU=31
 
+# Sample render targets directly as textures instead of copying them.
+# Measured: stutters -15%, 1% low +7%. Remove to use the copy path.
+export XEMU_SURF_TEX_SAMPLE=1
+
 exec "$BIN" -config_path "$CFG" -dvd_path "$ROM"
