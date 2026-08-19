@@ -1,0 +1,17 @@
+[general]
+show_welcome = false
+
+[general.updates]
+check = false
+
+[sys.files]
+bootrom_path = '@BIOSDIR@/mcpx_1.0.bin'
+flashrom_path = '@BIOSDIR@/complex_4627.bin'
+eeprom_path = '@BIOSDIR@/eeprom.bin'
+hdd_path = '@BIOSDIR@/xbox_hdd.qcow2'
+
+[display]
+renderer = 'VULKAN'
+
+[display.window]
+fullscreen_on_startup = true
