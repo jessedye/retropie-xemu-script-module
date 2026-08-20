@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-     width="420px" height="110px" viewBox="0 0 420 110">
+     width="470px" height="120px" viewBox="0 0 470 120">
   <title>Xbox</title>
-  <g fill="none" stroke="#ffffff" stroke-width="13"
-     stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="55" cy="55" r="48" fill="#107C10" stroke="none"/>
-    <path d="M31,31 L79,79"/>
-    <path d="M79,31 L31,79"/>
-    <path d="M120,28 L172,82"/>
-    <path d="M172,28 L120,82"/>
-    <path d="M190,82 L190,28 L222,28 A13.5,13.5 0 0 1 222,55 L190,55"/>
-    <path d="M190,55 L228,55 A13.5,13.5 0 0 1 228,82 L190,82"/>
-    <ellipse cx="286" cy="55" rx="26" ry="27"/>
-    <path d="M330,28 L382,82"/>
-    <path d="M382,28 L330,82"/>
+  <!-- Only filled paths, plain circles and strokes: EmulationStation renders
+       SVG through nanosvg, which does not handle text and is unreliable with
+       evenodd cutouts, so the wordmark is drawn as solid letterforms and the
+       O is a thick stroked circle rather than a ring with a hole. -->
+  <circle cx="60" cy="60" r="52" fill="#107C10"/>
+  <path fill="#ffffff" d="
+      M32,28 L46,26 L60,50 L74,26 L88,28
+      L68,60 L88,92 L74,94 L60,70 L46,94 L32,92 L52,60 Z"/>
+
+  <g fill="#ffffff">
+    <path d="M132,18 L150,18 L163,44 L176,18 L194,18
+             L172,60 L194,102 L176,102 L163,76 L150,102 L132,102
+             L154,60 Z"/>
+    <path d="M396,18 L414,18 L427,44 L440,18 L458,18
+             L436,60 L458,102 L440,102 L427,76 L414,102 L396,102
+             L418,60 Z"/>
+    <path d="M208,18 L254,18
+             C272,18 283,28 283,43
+             C283,52 278,59 270,63
+             C281,66 289,74 289,86
+             C289,97 279,102 258,102
+             L208,102 Z
+             M227,34 L227,54 L250,54
+             C258,54 264,50 264,44 C264,38 258,34 250,34 Z
+             M227,68 L227,86 L254,86
+             C263,86 269,83 269,77 C269,71 263,68 254,68 Z"
+          fill="#ffffff" fill-rule="evenodd"/>
   </g>
+  <circle cx="340" cy="60" r="34" fill="none" stroke="#ffffff" stroke-width="19"/>
 </svg>
