@@ -123,6 +123,18 @@ Worth knowing for a 2 GB Pi: `dtoverlay=vc4-kms-v3d,cma-512` in
 `/boot/firmware/config.txt` gives the GPU enough contiguous memory, and a
 modest V3D overclock (`v3d_freq=1350`) measured +9% fps.
 
+## Logs
+
+Every session writes a frame-timing CSV and the emulator's console output to
+`~/perflogs`, named from the ROM and a timestamp so switching games never
+overwrites the previous run — a fixed path loses the run you wanted the moment
+you launch anything else. `~/xemu-last.log` symlinks to the newest. Only the 60
+most recent of each are kept.
+
+Analyse a run with `scripts/perflog_report.py summary RUN.csv`, or compare two
+with `compare BEFORE.csv AFTER.csv`. Set `XEMU_NO_LOG=1` to disable, or
+`XEMU_LOG_DIR` to relocate.
+
 ## Troubleshooting
 
 - **Black screen, straight back to EmulationStation**: almost always a
