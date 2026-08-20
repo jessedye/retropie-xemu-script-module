@@ -71,6 +71,51 @@ function configure_xemu-pi5() {
     addSystem "xbox" "Microsoft Xbox" ".iso .xiso"
 
     _theme_xemu-pi5
+    _collection_art_xemu-pi5
+}
+
+function _collection_art_xemu-pi5() {
+    # A custom collection is themed by its own name, so a collection called
+    # "N64 HD" makes EmulationStation look for art/systems/N64 HD.svg. When
+    # that is missing the fallback miscomputes the font size - a 128x
+    # oversized glyph atlas - and ES dies at boot claiming gpu_split is too
+    # low. It then restarts and dies again. Give every custom collection art
+    # so that path is never taken.
+    local settings="$configdir/all/emulationstation/es_settings.cfg"
+    local theme name base src
+
+    [[ -f "$settings" ]] || return 0
+
+    local names
+    names=$(sed -n 's|.*CollectionSystemsCustom" value="\([^"]*\)".*|\1|p' "$settings")
+    [[ -n "$names" ]] || return 0
+
+    for theme in "$configdir/all/emulationstation/themes"/* \
+                 /etc/emulationstation/themes/*; do
+        [[ -d "$theme/art/systems" ]] || continue
+        local IFS=,
+        for name in $names; do
+            name="${name#"${name%%[![:space:]]*}"}"
+            name="${name%"${name##*[![:space:]]}"}"
+            [[ -n "$name" ]] || continue
+            [[ -f "$theme/art/systems/$name.svg" ]] && continue
+
+            # Prefer the art of the system the collection is built from, so
+            # "N64 HD" borrows n64.svg; otherwise fall back to the all-games
+            # icon that every carbon derivative ships.
+            base=$(echo "${name%% *}" | tr '[:upper:]' '[:lower:]')
+            for src in "$theme/art/systems/$base.svg" \
+                       "$theme/art/systems/auto-allgames.svg"; do
+                [[ -f "$src" ]] && cp -f "$src" "$theme/art/systems/$name.svg" && break
+            done
+            for src in "$theme/art/controllers/$base.svg" \
+                       "$theme/art/controllers/auto-allgames.svg"; do
+                [[ -d "$theme/art/controllers" ]] || break
+                [[ -f "$src" ]] && cp -f "$src" "$theme/art/controllers/$name.svg" && break
+            done
+        done
+        unset IFS
+    done
 }
 
 function _theme_xemu-pi5() {

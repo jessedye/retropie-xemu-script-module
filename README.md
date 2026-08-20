@@ -24,6 +24,7 @@ matter.
 | Direct render-target sampling (no per-frame copies) | stutters −15%, 1%-low +7% |
 | Vulkan present loop paced to vblank | p99 −6%, stutters −17% |
 | Deferred flip-stall wait | GTA median frame −10% |
+| Persistent pipeline and SPIR-V caches | startup only — boot window 20.5 → 43.7 fps; **no gameplay fps change** |
 
 End to end, against the same build with the renderer changes disabled:
 
@@ -46,7 +47,8 @@ Fixes from this work are being upstreamed to xemu
 ([#2977](https://github.com/xemu-project/xemu/pull/2977),
 [#2979](https://github.com/xemu-project/xemu/pull/2979),
 [#2980](https://github.com/xemu-project/xemu/pull/2980),
-[#2981](https://github.com/xemu-project/xemu/pull/2981)); this module
+[#2981](https://github.com/xemu-project/xemu/pull/2981),
+[#2988](https://github.com/xemu-project/xemu/pull/2988)); this module
 tracks the integration branch until they land.
 
 ## Requirements
@@ -91,6 +93,14 @@ controller silhouette and a green accent colour into every installed theme
 that has the usual `art/systems` layout. Nothing else in the theme is
 touched, and a theme without that layout is skipped.
 
+Custom collections are covered too, and not only for looks. A collection is
+themed by its own name, so one called `N64 HD` sends EmulationStation looking
+for `art/systems/N64 HD.svg`; when that file is missing the fallback
+miscomputes the glyph size — a 128x oversized font atlas — and ES exits at boot
+blaming `gpu_split`, then restarts and does it again. The module gives every
+configured collection art, borrowing the underlying system's icon where the
+name allows it.
+
 ## Performance switches
 
 The launcher enables the runtime optimisations that are not on by default.
@@ -119,6 +129,14 @@ modest V3D overclock (`v3d_freq=1350`) measured +9% fps.
 - **Xbox menu still shows plain red text**: the theme was installed after
   this module. Re-run the module's Configure step, or copy
   `scriptmodules/emulators/xemu-pi5/theme/` into the theme by hand.
+- **EmulationStation quits at boot telling you to raise `gpu_split` or switch
+  to the carbon theme**: it is out of texture memory, and on a Pi 5 that is
+  almost never the split. Look for `size 138240` in
+  `/opt/retropie/configs/all/emulationstation/es_log.txt` — an oversized font
+  atlas from a custom collection with no matching `art/systems/<name>.svg`.
+  Re-run this module's Configure step, or drop any system SVG in under the
+  collection's exact name. Note the process name truncates to
+  `emulationstatio`, so `pgrep -x emulationstatio` is the check that works.
 
 ## License
 
