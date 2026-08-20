@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+     width="420px" height="110px" viewBox="0 0 420 110">
+  <title>Xbox</title>
+  <g fill="none" stroke="#ffffff" stroke-width="13"
+     stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="55" cy="55" r="48" fill="#107C10" stroke="none"/>
+    <path d="M31,31 L79,79"/>
+    <path d="M79,31 L31,79"/>
+    <path d="M120,28 L172,82"/>
+    <path d="M172,28 L120,82"/>
+    <path d="M190,82 L190,28 L222,28 A13.5,13.5 0 0 1 222,55 L190,55"/>
+    <path d="M190,55 L228,55 A13.5,13.5 0 0 1 228,82 L190,82"/>
+    <ellipse cx="286" cy="55" rx="26" ry="27"/>
+    <path d="M330,28 L382,82"/>
+    <path d="M382,28 L330,82"/>
+  </g>
+</svg>

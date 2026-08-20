@@ -1,0 +1,9 @@
+<theme>
+	<formatVersion>6</formatVersion>
+
+	<variables>
+		<themeColor>107C10</themeColor>
+	</variables>
+
+	<include>./../theme.xml</include>
+</theme>

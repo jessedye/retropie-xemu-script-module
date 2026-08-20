@@ -6,8 +6,12 @@
 #
 # Installs a Raspberry Pi 5 optimised build of the xemu original-Xbox
 # emulator: Vulkan swapchain presentation (no GL interop), x86-TSO via
-# acquire/release accesses, and native-double x87 helpers. Measured on
-# Halo 2: native 30 fps; GTA San Andreas: steady 60.
+# acquire/release accesses, native-double x87 helpers, and a renderer that
+# keeps repeatedly rewritten vertex data out of the mirrored RAM buffer.
+#
+# Measured on gameplay, not menus: Morrowind median frame time 115 ms -> 57 ms
+# and GTA San Andreas 42 ms -> 34 ms with half the stutters, against the same
+# build with those renderer changes disabled.
 
 rp_module_id="xemu-pi5"
 rp_module_desc="xemu - original Xbox emulator (Pi 5 optimised build)"
@@ -65,4 +69,26 @@ function configure_xemu-pi5() {
 
     addEmulator 1 "$md_id" "xbox" "$md_inst/launcher.sh %ROM%"
     addSystem "xbox" "Microsoft Xbox" ".iso .xiso"
+
+    _theme_xemu-pi5
+}
+
+function _theme_xemu-pi5() {
+    # Carbon ships no xbox artwork, so EmulationStation falls back to plain
+    # text in the default red. Install a logo, a controller and a green accent
+    # for every installed theme that has the same layout.
+    local theme
+    local src="$md_data/theme"
+
+    [[ -d "$src" ]] || return 0
+
+    for theme in "$configdir/all/emulationstation/themes"/* \
+                 /etc/emulationstation/themes/*; do
+        [[ -d "$theme/art/systems" ]] || continue
+        cp -f "$src/xbox-logo.svg" "$theme/art/systems/xbox.svg"
+        [[ -d "$theme/art/controllers" ]] &&
+            cp -f "$src/xbox-controller.svg" "$theme/art/controllers/xbox.svg"
+        mkdir -p "$theme/xbox"
+        cp -f "$src/theme.xml" "$theme/xbox/theme.xml"
+    done
 }

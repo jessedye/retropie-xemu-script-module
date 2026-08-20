@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+     width="400px" height="280px" viewBox="0 0 400 280">
+  <title>Xbox Controller</title>
+  <g fill="none" stroke="#ffffff" stroke-width="9"
+     stroke-linecap="round" stroke-linejoin="round">
+    <path d="M140,62 C170,54 230,54 260,62
+             C300,58 330,72 344,100
+             C368,150 360,210 330,238
+             C306,258 282,246 272,220
+             C260,190 236,178 200,178
+             C164,178 140,190 128,220
+             C118,246 94,258 70,238
+             C40,210 32,150 56,100
+             C70,72 100,58 140,62 Z"/>
+    <circle cx="106" cy="98" r="25"/>
+    <circle cx="106" cy="98" r="10"/>
+    <circle cx="236" cy="136" r="24"/>
+    <circle cx="236" cy="136" r="10"/>
+    <path d="M132,136 h20 v-20 h20 v20 h20 v20 h-20 v20 h-20 v-20 h-20 Z"/>
+    <circle cx="300" cy="72" r="11"/>
+    <circle cx="326" cy="98" r="11"/>
+    <circle cx="274" cy="98" r="11"/>
+    <circle cx="300" cy="124" r="11"/>
+  </g>
+</svg>
