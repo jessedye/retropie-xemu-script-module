@@ -87,6 +87,13 @@ ROMs (`.iso` / `.xiso`) go in `~/RetroPie/roms/xbox/`.
 
 ## EmulationStation artwork
 
+> **If you installed this module before this fix**, replace
+> `<theme-dir>/xbox/theme.xml` with the copy in
+> `scriptmodules/emulators/xemu-pi5/theme/`, or re-run the module's Configure
+> step. The earlier file omitted `<resolution>`, which made EmulationStation
+> scale its font sizes against the wrong reference and abort at boot claiming
+> `gpu_split` was too low.
+
 Carbon and its derivatives ship no `xbox` system art, so EmulationStation
 falls back to plain text in the default red. The module installs a logo, a
 controller silhouette and a green accent colour into every installed theme
